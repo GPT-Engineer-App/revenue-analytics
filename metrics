@@ -1,0 +1,76 @@
+import { useState } from "react";
+import {
+  Card,
+  CardHeader,
+  CardTitle,
+  CardContent,
+  CardFooter,
+} from "@/components/ui/card.jsx";
+import { Separator } from "@/components/ui/separator.jsx";
+import { Slider } from "@/components/ui/slider.jsx";
+import { Metric } from "@/components/ui/metric.jsx";
+import { Button } from "@/components/ui/button.jsx";
+import { Dropdown } from "@/components/ui/dropdown.jsx";
+import { LineChart } from "@/components/ui/line-chart.jsx";
+import { BarChart } from "@/components/ui/bar-chart.jsx";
+import { PieChart } from "@/components/ui/pie-chart.jsx";
+
+function Dashboard() {
+  const [selectedPeriod, setSelectedPeriod] = useState("last_30_days");
+
+  return (
+    <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <Card>
+        <CardHeader>
+          <CardTitle>Sales</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Metric value={$123456} label="Total Sales" />
+          <Separator className="my-4" />
+          <LineChart data={[...]} />
+        </CardContent>
+        <CardFooter>
+          <Dropdown
+            value={selectedPeriod}
+            onChange={setSelectedPeriod}
+            options={[
+              { value: "last_30_days", label: "Last 30 Days" },
+              { value: "last_90_days", label: "Last 90 Days" },
+              { value: "last_year", label: "Last Year" },
+            ]}
+          />
+        </CardFooter>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Revenue</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Metric value={$987654} label="Total Revenue" />
+          <Separator className="my-4" />
+          <BarChart data={[...]} />
+        </CardContent>
+        <CardFooter>
+          <Button variant="outline">View Report</Button>
+        </CardFooter>
+      </Card>
+
+      <Card>
+        <CardHeader>
+          <CardTitle>Customer Acquisition</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <Metric value={1234} label="New Customers" />
+          <Separator className="my-4" />
+          <PieChart data={[...]} />
+        </CardContent>
+        <CardFooter>
+          <Slider value={50} onChange={(value) => console.log(value)} />
+        </CardFooter>
+      </Card>
+    </div>
+  );
+}
+
+export default Dashboard;
